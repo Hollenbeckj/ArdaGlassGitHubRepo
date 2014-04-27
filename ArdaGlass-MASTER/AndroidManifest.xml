@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="come.joshandryan.ArdaGlass"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="15" />
+	
+    <!-- Note that HelloGlass doesn't not use a theme. Don't use themes. -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /><uses-permission android:name="android.permission.BLUETOOTH"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ardadroid"
+        android:label="@string/ArdaGlass" >
+        <activity
+            android:name="com.joshandryan.letsdrive.Magic"
+            android:label="@string/ArdaGlass"
+            android:enabled="true">            
+        </activity>
+        <service
+            android:name="com.joshandryan.letsdrive.HelloGlass"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/ardadroid"
+            android:label="@string/ArdaGlass" >
+            <intent-filter>
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
+            </intent-filter>
+			
+            <!-- Voice command found in res/xml/voice_trigger_start -->
+            <meta-data
+                android:name="com.google.android.glass.VoiceTrigger"
+                android:resource="@xml/voice_trigger_start" />
+        </service>
+    </application>
+
+</manifest>
