@@ -1,11 +1,7 @@
-/*
- * HelloGlass.java
- * @author Cody Engel
- * http://codyengel.info
- */
+
 package com.joshandryan.letsdrive;
 
-// Glass Specific
+// Glass related setup 
 import com.google.android.glass.timeline.LiveCard;
 import com.google.android.glass.timeline.TimelineManager;
 

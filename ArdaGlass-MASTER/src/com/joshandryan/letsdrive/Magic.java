@@ -1,5 +1,6 @@
-// this app was created by Joshua Hollenbeck
-// NOTE: this app was created on top of an existing example app created by:Cody Engel titled < HELLO GLASS > and the serial communication basics were used from Matt Bell's project--(http://bellcode.wordpress.com/2012/01/02/android-and-arduino-bluetooth-communication/)-- I simply took his open source code and re made it to work with the google glass handset  
+// this app was created by Joshua Hollenbeck 
+// this application is open to modifications and contributions. This is my first application ever made for android so I hope those of you who use it find it helpfull 
+// a special thanks to Matt Bell for providing an open source working example of serial communication for android and Cody Engel for providing his Hello Glass example as a base for this project 
 // Source Credit 1: Matt Bell -- (http://bellcode.wordpress.com/2012/01/02/android-and-arduino-bluetooth-communication/)
 // Source Credit 2: Cody Engel -- (https://plus.google.com/+CodyEngel/posts)
 package com.joshandryan.letsdrive;
@@ -47,11 +48,11 @@ public class Magic extends Activity
 	 volatile boolean stopWorker; // used to control the thread activity 
 	 String ArduinoData = " "; // string for arduino Data 
 	 boolean deviceFound; // true or false statement for telling the app if devices are found or not 
-	 boolean streamStarted; // tells the app if bytes are comming in 
-	 Card card1 = new Card(this); // constructer statememnt for the card class specific to the GDK 
+	 boolean streamStarted; // tells the app if bytes are coming in 
+	 Card card1 = new Card(this); // constructor statement for the card class specific to the GDK 
 
 	
-    void findBT()
+    void searchForBluetooth()
     {
     	if(!deviceFound) // if no bluetooth device is found 
     	{
@@ -82,7 +83,7 @@ public class Magic extends Activity
                     mmDevice = device; // the device specified above is the device needed to connect 
                     deviceFound = true; // set the device found boolean to be true 
                     try { // once a device is found use a try sequence and run a script that opens the bluetooth socket 
-						openBT(); // see script bellow for more info
+						openSerial(); // see script bellow for more info
 					} catch (IOException e) { // if something goes wrong in the script run a fall back script 
 						deviceFound = false; // set the device found equal to false which will re run the above set of lines 
 						e.printStackTrace(); 
@@ -95,7 +96,7 @@ public class Magic extends Activity
    }
     
 	
-	void openBT() throws IOException // opens a standard bluetooth socket to establish data transfering 
+	void openSerial() throws IOException // opens a standard bluetooth socket to establish data transferring 
     {
 		
         UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"); //Standard SerialPortService ID
@@ -112,9 +113,9 @@ public class Magic extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) // create a saved instance of what is happening if the user accidentally quits the app so they can resume the data stream 
 	{
-		final Handler handler = new Handler(); // sets up a handeler for the saved instance 
+		final Handler handler = new Handler(); // sets up a handler for the saved instance 
         final byte delimiter = 10; //This is the ASCII code for a newline character
-        findBT(); // run the find BT script 
+        searchForBluetooth(); // run the find BT script 
         
         stopWorker = false; // stopWorker which controls if the bellow lines run 
         readBufferPosition = 0; // position of data 
